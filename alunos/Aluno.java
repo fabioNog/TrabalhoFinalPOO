@@ -1,24 +1,29 @@
 package ifsuldeminas.alunos;
 
-public class Aluno {
-	private String nome;
-	private int ra;
-	private String curso;
-	private int int periodo;
-	
-	public Aluno(String nome, int ra, String curso) {
-		setNome(nome);
+import ifsuldeminas.academico.Pessoa;
+
+public class Aluno extends Pessoa{
+	public Aluno(String nome,int ra, String curso) {
+		super(nome);
 		setRa(ra);
 		setCurso(curso);
 		setPeriodo(1);
 	}
 	
-	Aluno(String nome, int ra, int periodo, String curso){
-		setNome(nome);
+	public Aluno(String nome,int ra, int periodo,String curso) {
+		super(nome);
 		setRa(ra);
 		setCurso(curso);
 		setPeriodo(periodo);
 	}
+	
+	private String nome;
+	private int ra;
+	private String curso;
+	private int periodo;
+	
+
+	
 
 	public String getNome() {
 		return nome;
@@ -52,5 +57,8 @@ public class Aluno {
 		this.periodo = periodo;
 	}
 	
+	public void exibirAluno() {
+		System.out.print("Nome: " + this.getNome() + " RA: " + this.getRa() + " Periodo: " + this.getPeriodo() + " Curso: " + this.getCurso());
+	}
 	
 }
