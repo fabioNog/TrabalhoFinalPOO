@@ -8,6 +8,12 @@ public class Professor extends Pessoa{
 
 	public Professor(String nome,int suap) {
 		super(nome);
+		if(suap >=1000 && suap <=9999) {
+			this.setSuap(suap);
+		}
+		else {
+			System.out.println("Não foi possivel criar o professor");
+		}
 	}
 
 	public int getSuap() {

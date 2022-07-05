@@ -3,6 +3,11 @@ package ifsuldeminas.alunos;
 import ifsuldeminas.academico.Pessoa;
 
 public class Aluno extends Pessoa{
+	private String nome;
+	private int ra;
+	private String curso;
+	private int periodo;
+	
 	public Aluno(String nome,int ra, String curso) {
 		super(nome);
 		setRa(ra);
@@ -16,13 +21,6 @@ public class Aluno extends Pessoa{
 		setCurso(curso);
 		setPeriodo(periodo);
 	}
-	
-	private String nome;
-	private int ra;
-	private String curso;
-	private int periodo;
-	
-
 	
 
 	public String getNome() {
