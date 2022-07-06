@@ -76,11 +76,7 @@ public class Disciplina {
 	public boolean matricularAluno(Aluno aluno) {
 
 		Iterator<Aluno> iterator = this.alunos.iterator();
-		while (iterator.hasNext()) {
-			if (iterator.equals(aluno.getRa())) {
-				return false;
-			}
-		}
+		
 		this.alunos.add(aluno);
 		this.notas.add(0.0);
 		this.frequencias.add(0);
@@ -196,6 +192,32 @@ public class Disciplina {
 		}
 		media = somaNotas / n;
 		return media;
+	}
+	
+	public double retornaMaiorNota() {
+		Double maxValue = 0.0;
+
+		for (Double notas : this.notas) {
+			if (notas > maxValue)
+				maxValue = notas;
+		}
+		
+		return maxValue;
+	}
+	
+	public double retornaMenorNota() {
+		Double minValue = 0.0;
+
+		for (Double notas : this.notas) {
+			if (notas < minValue)
+				minValue = notas;
+		}
+		
+		return minValue;
+	}
+	
+	public String retornaNomeAluno(int posicao) {
+		return this.alunos.get(posicao).getNome();
 	}
 
 	public void exibirMaiorNota() {
