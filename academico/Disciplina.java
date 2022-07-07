@@ -26,6 +26,7 @@ public class Disciplina {
 		this.numTotalAulas = this.getNumAulasSemana() * numSemanas;
 		this.alunos = new ArrayList<Aluno>();
 		this.notas = new ArrayList<Double>();
+		this.frequencias = new ArrayList<Integer>();
 		this.professor = null;
 	}
 
@@ -75,12 +76,27 @@ public class Disciplina {
 
 	public boolean matricularAluno(Aluno aluno) {
 
-		Iterator<Aluno> iterator = this.alunos.iterator();
-		
-		this.alunos.add(aluno);
-		this.notas.add(0.0);
-		this.frequencias.add(0);
-		return true;
+		int n = this.alunos.size();
+		int i = 0;
+		if (n == 0) {
+			this.alunos.add(aluno);
+			this.notas.add(0.0);
+			this.frequencias.add(0);
+			return true;
+		} else {
+			while (i < n) {
+				if (this.alunos.get(i).getRa() == aluno.getRa()) {
+					return false;
+				}
+				i++;
+			}
+			this.alunos.add(aluno);
+			this.notas.add(0.0);
+			this.frequencias.add(0);
+			return true;
+
+		}
+
 	}
 
 	public boolean desmatricularAluno(int posAluno) {
@@ -193,7 +209,7 @@ public class Disciplina {
 		media = somaNotas / n;
 		return media;
 	}
-	
+
 	public double retornaMaiorNota() {
 		Double maxValue = 0.0;
 
@@ -201,10 +217,10 @@ public class Disciplina {
 			if (notas > maxValue)
 				maxValue = notas;
 		}
-		
+
 		return maxValue;
 	}
-	
+
 	public double retornaMenorNota() {
 		Double minValue = 0.0;
 
@@ -212,12 +228,16 @@ public class Disciplina {
 			if (notas < minValue)
 				minValue = notas;
 		}
-		
+
 		return minValue;
 	}
-	
+
 	public String retornaNomeAluno(int posicao) {
 		return this.alunos.get(posicao).getNome();
+	}
+
+	public double retornaNotas(int posicao) {
+		return this.notas.get(posicao);
 	}
 
 	public void exibirMaiorNota() {
@@ -292,114 +312,113 @@ public class Disciplina {
 
 		}
 	}
-	
+
 	public void exibirProfessor() {
-		System.out.println("Nome " + this.professor.getNome()  + " SUAP " + this.professor.getSuap());
+		System.out.println("Nome " + this.professor.getNome() + " SUAP " + this.professor.getSuap());
 	}
-	
+
 	public double getAproveitmentoAluno(int posAluno) {
-		
+
 		int frequencia = this.frequencias.get(posAluno);
-		double frequenciaTotal = (frequencia*100)/this.numTotalAulas;
-		return frequenciaTotal;				
+		double frequenciaTotal = (frequencia * 100) / this.numTotalAulas;
+		return frequenciaTotal;
 	}
-	
+
 	public double getNotaAluno(int posAluno) {
 		return this.notas.get(posAluno);
 	}
-		
-	public void exibirAlunosAcimaMedia() {		
+
+	public void exibirAlunosAcimaMedia() {
 		int i;
 		int n = this.alunos.size();
-		
-		for (i=0; i<n; i++) {
-			if(this.notas.get(i) >= this.calcularMedia()) {
+
+		for (i = 0; i < n; i++) {
+			if (this.notas.get(i) >= this.calcularMedia()) {
 				System.out.println("Alunos com nota acima da media");
-				System.out.println("Nome: " + this.alunos.get(i).getNome() + " RA:  " + this.alunos.get(i).getRa() + " Curso: " + this.alunos.get(i).getCurso() + " Periodo: " + this.alunos.get(i).getPeriodo());
+				System.out.println("Nome: " + this.alunos.get(i).getNome() + " RA:  " + this.alunos.get(i).getRa()
+						+ " Curso: " + this.alunos.get(i).getCurso() + " Periodo: " + this.alunos.get(i).getPeriodo());
 			}
 		}
 	}
-	
+
 	public void exibirAlunosAbaixoMedia() {
 		int i;
 		int n = this.alunos.size();
-		
-		for (i=0; i<n; i++) {
-			if(this.notas.get(i) < this.calcularMedia()) {
+
+		for (i = 0; i < n; i++) {
+			if (this.notas.get(i) < this.calcularMedia()) {
 				System.out.println("Alunos com nota abaixo da media");
-				System.out.println("Nome: " + this.alunos.get(i).getNome() + " RA:  " + this.alunos.get(i).getRa() + " Curso: " + this.alunos.get(i).getCurso() + " Periodo: " + this.alunos.get(i).getPeriodo());
+				System.out.println("Nome: " + this.alunos.get(i).getNome() + " RA:  " + this.alunos.get(i).getRa()
+						+ " Curso: " + this.alunos.get(i).getCurso() + " Periodo: " + this.alunos.get(i).getPeriodo());
 			}
 		}
 	}
-	
+
 	public void exibirAlunoNotaAproveitamento() {
 		int i;
 		int n = this.alunos.size();
-		
-		if(n == 0) {
+
+		if (n == 0) {
 			System.out.println("Disciplina não possui alunos matriculados");
-		}
-		else {
-			for (i=0; i<n; i++) {
-				if(this.notas.get(i) < this.calcularMedia()) {
-					System.out.println("Nome: " + this.alunos.get(i).getNome() + " nota:  " + this.notas.get(i) + " Aproveitamento: " + this.alunos.get(i).getCurso() + " Periodo: " + this.getAproveitmentoAluno(i));
+		} else {
+			for (i = 0; i < n; i++) {
+				if (this.notas.get(i) < this.calcularMedia()) {
+					System.out.println("Nome: " + this.alunos.get(i).getNome() + " nota:  " + this.notas.get(i)
+							+ " Aproveitamento: " + this.alunos.get(i).getCurso() + " Periodo: "
+							+ this.getAproveitmentoAluno(i));
 				}
 			}
-		}		
+		}
 	}
-	
+
 	public void desmatricularAlunos() {
 		int i;
 		int n = this.alunos.size();
-		
-		if(n == 0) {
+
+		if (n == 0) {
 			System.out.println("Disciplina não possui alunos matriculados");
-		}
-		else {
-			for (i=0; i<n; i++) {
+		} else {
+			for (i = 0; i < n; i++) {
 				this.alunos.remove(i);
 				this.notas.remove(i);
 				this.frequencias.remove(i);
 			}
-		}		
+		}
 	}
-	
+
 	public void exibirOrdenadosPorNota() {
-		int i,recebePosicao=0;
+		int i, recebePosicao = 0;
 		int n = this.alunos.size();
 		Collections.sort(this.notas, Collections.reverseOrder());
-		for(i = 0; i< n; i++){
+		for (i = 0; i < n; i++) {
 			recebePosicao = this.procuraNota(this.notas.get(i));
-			if(recebePosicao == 0) {
+			if (recebePosicao == 0) {
 				System.out.println("Não existe esta nota");
-			}
-			else {
+			} else {
 				System.out.println("Aluno " + this.alunos.get(recebePosicao) + "Nota: " + this.notas.get(i));
 			}
-		}		 		  
+		}
 	}
-	
+
 	public int procuraNota(double posicao) {
 		int n = this.notas.size();
 		int i;
 		int encontraPosicao = 0;
-		for(i=0;i<n;i++) {
+		for (i = 0; i < n; i++) {
 			if (this.notas.get(i).equals(posicao)) {
-		            encontraPosicao = i;
-		     }
-			else {
+				encontraPosicao = i;
+			} else {
 				i++;
 			}
 		}
-		
-		if(i == n) {
+
+		if (i == n) {
 			return 0;
-		}
-		else {
+		} else {
 			return encontraPosicao;
-		}	
+		}
 	}
-	
+
 	public void exibirDisciplina() {
 		int n = this.notas.size();
 		int i;
@@ -408,15 +427,16 @@ public class Disciplina {
 		System.out.println("Nome do Professor: " + this.professor.getNome() + " SUAP " + this.professor.getSuap());
 		System.out.println("********** Professor *********");
 		System.out.println("Info do Aluno");
-		for(i=0;i<n;i++) {
-			System.out.println("*********** Aluno " +  i + " ***************");
-			System.out.println("Nome do Aluno " + this.alunos.get(i).getNome() + " RA: " + this.alunos.get(i).getRa() + "Esta no periodo: " + this.alunos.get(i).getPeriodo());
+		for (i = 0; i < n; i++) {
+			System.out.println("*********** Aluno " + i + " ***************");
+			System.out.println("Nome do Aluno " + this.alunos.get(i).getNome() + " RA: " + this.alunos.get(i).getRa()
+					+ "Esta no periodo: " + this.alunos.get(i).getPeriodo());
 			System.out.println("Sua nota foi de " + this.notas.get(i));
-			System.out.println( "Sua frequencia foi de" + this.frequencias.get(i));
-			System.out.println("*********** Aluno " +  i + " ***************");
+			System.out.println("Sua frequencia foi de" + this.frequencias.get(i));
+			System.out.println("*********** Aluno " + i + " ***************");
 		}
-						
+
 		System.out.println("********** Exibindo Disciplina *********");
 	}
-	
+
 }

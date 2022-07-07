@@ -2,21 +2,21 @@ package ifsuldeminas.alunos;
 
 import ifsuldeminas.academico.Pessoa;
 
-public class Aluno extends Pessoa{
+public class Aluno{
 	private String nome;
 	private int ra;
 	private String curso;
 	private int periodo;
 	
 	public Aluno(String nome,int ra, String curso) {
-		super(nome);
+		setNome(nome);
 		setRa(ra);
 		setCurso(curso);
 		setPeriodo(1);
 	}
 	
 	public Aluno(String nome,int ra, int periodo,String curso) {
-		super(nome);
+		setNome(nome);
 		setRa(ra);
 		setCurso(curso);
 		setPeriodo(periodo);
