@@ -420,23 +420,32 @@ public class Disciplina {
 	}
 
 	public void exibirDisciplina() {
-		int n = this.notas.size();
-		int i;
-		System.out.println("********** Exibindo Disciplina *********");
+		int n = this.alunos.size();
+		int i = 0;
+		System.out.println(n);
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++ Exibindo Disciplina ++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println("");
 		System.out.println("********** Professor *********");
-		System.out.println("Nome do Professor: " + this.professor.getNome() + " SUAP " + this.professor.getSuap());
+		this.professor.exibirProfessor();
+		System.out.println("");
 		System.out.println("********** Professor *********");
+		System.out.println("");
 		System.out.println("Info do Aluno");
-		for (i = 0; i < n; i++) {
-			System.out.println("*********** Aluno " + i + " ***************");
+		System.out.println("");
+		for(i=0;i<n;i++) {
+			System.out.println("*********** Aluno" + (i+1) + " ***************");
+			System.out.println("");
 			System.out.println("Nome do Aluno " + this.alunos.get(i).getNome() + " RA: " + this.alunos.get(i).getRa()
 					+ "Esta no periodo: " + this.alunos.get(i).getPeriodo());
 			System.out.println("Sua nota foi de " + this.notas.get(i));
 			System.out.println("Sua frequencia foi de" + this.frequencias.get(i));
-			System.out.println("*********** Aluno " + i + " ***************");
+			System.out.println("");
+			System.out.println("*********** Aluno" + (i + 1) + " ***************");
+			System.out.println("");
 		}
 
-		System.out.println("********** Exibindo Disciplina *********");
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++ Exibindo Disciplina ++++++++++++++++++++++++++++++++++++++++++");
+		
 	}
 
 }

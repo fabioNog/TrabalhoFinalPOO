@@ -1,18 +1,28 @@
 package ifsuldeminas.funcionarios;
 
+import java.util.Scanner;
+
 import ifsuldeminas.academico.Pessoa;
 
 public class Professor{
 	private String nome;
 	private int suap;
+	
+	Scanner p = new Scanner(System.in);
+	int prof;
 
 	public Professor(String nome,int suap) {
 		setNome(nome);
-		if(suap >=1000 && suap <=9999) {
+		if(suap >= 1000 && suap <=9999) {
 			this.setSuap(suap);
 		}
 		else {
-			System.out.println("Não foi possivel criar o professor");
+			while(suap < 1000 || suap > 9999) {
+				System.out.println("Não foi possivel criar o professor,digite novamente o SUAP ");
+				suap = p.nextInt();
+			}
+			this.setSuap(suap);
+			
 		}
 	}
 
